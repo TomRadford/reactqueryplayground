@@ -5,10 +5,10 @@ import { fetchPopularShows } from '../lib/services/shows'
 import Show from '../components/Show'
 
 const ShowsPage = () => {
-	const { isLoading, isError, data, error } = useQuery({
-		queryKey: ['popularShows'],
-		queryFn: fetchPopularShows,
-	})
+	const { isLoading, isError, data, error } = useQuery(
+		['popularShows'],
+		fetchPopularShows
+	)
 
 	if (isLoading) {
 		return <p>loading</p>

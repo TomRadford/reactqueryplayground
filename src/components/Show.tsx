@@ -31,7 +31,7 @@ const Show = ({
 									<img
 										src={`https://image.tmdb.org/t/p/original/${show.backdrop_path}`}
 										alt=""
-										className="h-full object-cover"
+										className="active: h-full object-cover blur-xl"
 									/>
 								</div>,
 								document.body
