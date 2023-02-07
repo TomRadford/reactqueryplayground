@@ -7,6 +7,7 @@ import { z } from 'zod'
  */
 export const serverSchema = z.object({
 	NODE_ENV: z.enum(['development', 'test', 'production']),
+	TMDB_KEY: z.string(),
 })
 
 /**
@@ -16,6 +17,7 @@ export const serverSchema = z.object({
  */
 export const serverEnv = {
 	NODE_ENV: process.env.NODE_ENV,
+	TMDB_KEY: process.env.TMDB_KEY,
 }
 
 /**
@@ -25,7 +27,7 @@ export const serverEnv = {
  */
 export const clientSchema = z.object({
 	// NEXT_PUBLIC_CLIENTVAR: z.string(),
-	NEXT_PUBLIC_TMDB_KEY: z.string(),
+
 	NEXT_PUBLIC_POCKETBASE_URI: z.string(),
 })
 
@@ -37,6 +39,6 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
 	// NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-	NEXT_PUBLIC_TMDB_KEY: process.env.NEXT_PUBLIC_TMDB_KEY,
+
 	NEXT_PUBLIC_POCKETBASE_URI: process.env.NEXT_PUBLIC_POCKETBASE_URI,
 }

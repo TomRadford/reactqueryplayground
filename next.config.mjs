@@ -1,4 +1,7 @@
 // @ts-check
+
+import { clientEnv, serverEnv } from './src/env/schema.mjs'
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
@@ -16,6 +19,14 @@ const config = {
 	},
 	images: {
 		domains: ['image.tmdb.org'],
+	},
+	async rewrites() {
+		return [
+			{
+				source: '/api/tv/popular/:page',
+				destination: `https://api.themoviedb.org/3/tv/popular?page=:page&api_key=${serverEnv.TMDB_KEY}`,
+			},
+		]
 	},
 }
 export default config

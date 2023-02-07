@@ -5,12 +5,13 @@ import Show from '../components/Show'
 import React from 'react'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
+import { nanoid } from 'nanoid'
 
 const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 	const { inView, ref } = useInView()
 	const { data, fetchNextPage, isLoading } = useInfiniteQuery({
 		queryKey: [userShows ? 'userShows' : 'popularShows'],
-		queryFn: userShows ? fetchUserShows : fetchPopularShows,
+		queryFn: fetchPopularShows,
 
 		refetchOnMount: false,
 		getNextPageParam: (lastPage, pages) => lastPage.page + 1,
@@ -38,8 +39,8 @@ const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 				{data?.pages.map((group, i) => (
 					<>
 						<React.Fragment key={i}>
-							{group.results.map((show) => (
-								<Show show={show} key={show.id} />
+							{group.items.map((show) => (
+								<Show show={show} key={show.tmdb_id} />
 							))}
 						</React.Fragment>
 					</>

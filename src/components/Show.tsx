@@ -1,10 +1,14 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import type { z } from 'zod'
+import type { TmdbShowSchema } from '../../schema'
+import type { ShowSchema } from '../../schema'
+
 const Show = ({
 	show,
 }: {
-	show: { name: string; backdrop_path: string; poster_path: string }
+	show: z.infer<typeof TmdbShowSchema> | z.infer<typeof ShowSchema>
 }) => {
 	const [showBg, setShowBg] = useState(false)
 	return (
@@ -24,7 +28,7 @@ const Show = ({
 				<p className="absolute bottom-2 w-full text-center text-xl font-semibold text-white drop-shadow-xl">
 					{show.name}
 				</p>
-				{showBg
+				{showBg && show.backdrop_path
 					? createPortal(
 							<div className="fixed top-0 h-full w-full">
 								{
@@ -32,7 +36,7 @@ const Show = ({
 									<img
 										src={`https://image.tmdb.org/t/p/original/${show.backdrop_path}`}
 										alt=""
-										className="active: h-full object-cover blur-xl"
+										className="active: h-full w-full object-cover blur-xl"
 									/>
 								}
 							</div>,
