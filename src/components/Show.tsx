@@ -12,7 +12,23 @@ const Show = ({
 }) => {
 	const [showBg, setShowBg] = useState(false)
 	return (
-		<article className="drop-shadow-ld bg-blur-lg mx-auto flex w-[300px]  flex-col justify-center overflow-hidden rounded-xl bg-slate-300">
+		<article className="drop-shadow-ld bg-blur-lg relative mx-auto flex w-[300px] flex-col justify-center overflow-hidden rounded-xl bg-slate-300">
+			<button className="absolute right-1 top-1 z-10 hover:scale-110">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					strokeWidth={1.5}
+					stroke="white"
+					className="h-6 w-6"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M12 4.5v15m7.5-7.5h-15"
+					/>
+				</svg>
+			</button>
 			<div className="relative h-[500px] ">
 				<Image
 					src={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
