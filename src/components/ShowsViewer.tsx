@@ -7,6 +7,15 @@ import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
 import { nanoid } from 'nanoid'
 
+const ShowSkeleton = ({ ref }: { ref?: Element }) => (
+	<article
+		ref={ref}
+		className="drop-shadow-ld bg-blur-lg mx-auto flex w-[300px]  flex-col justify-center overflow-hidden rounded-xl bg-slate-300"
+	>
+		<div className="relative h-[500px] animate-pulse bg-gray-500"></div>
+	</article>
+)
+
 const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 	const { inView, ref } = useInView()
 	const { data, fetchNextPage, isLoading } = useInfiniteQuery({
@@ -32,7 +41,25 @@ const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 	if (inView) {
 		void fetchNextPage()
 	}
-
+	const getLoader = () => {
+		if (data?.pages && data.pages[0]) {
+			if (data?.pages?.length < data?.pages[0]?.totalPages) {
+				return (
+					<>
+						{[...(new Array(8) as undefined[])].map((_, i) => (
+							<article
+								key={i}
+								ref={i === 0 ? ref : undefined}
+								className="drop-shadow-ld bg-blur-lg mx-auto flex w-[300px]  flex-col justify-center overflow-hidden rounded-xl bg-slate-300"
+							>
+								<div className="relative h-[500px] animate-pulse bg-gray-500"></div>
+							</article>
+						))}
+					</>
+				)
+			}
+		} else return <></>
+	}
 	return (
 		<div className="flex flex-col items-center">
 			<div className="mx-auto mt-10 grid max-w-[1450px] grid-cols-1 gap-3 md:mx-16 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
@@ -45,8 +72,7 @@ const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 						</React.Fragment>
 					</>
 				))}
-
-				<div ref={ref}></div>
+				{getLoader()}
 			</div>
 		</div>
 	)
