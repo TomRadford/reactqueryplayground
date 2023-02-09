@@ -87,7 +87,7 @@ const ZodFunPage = () => {
 						id: 1,
 						username: val,
 						birthday: new Date('2001-01-01'),
-						// willremove: 'dasfd',
+						willremove: 'dasfd',
 						projects: ['MemeMaker'],
 						home: [1, '5', 15, 'sdf', 'sdfdf', 'sdfsd'],
 						car: { hasCar: true, carType: 'Honda' },
