@@ -20,3 +20,8 @@ export const ShowResultsSchema = z.object({
 	totalPages: z.number(),
 	items: z.array(z.union([ShowSchema, TmdbShowSchema])),
 })
+
+export const ShowResultsPaginatedSchema = z.object({
+	pageParams: z.array(z.union([z.null(), z.number(), z.undefined()])),
+	pages: z.array(ShowResultsSchema),
+})

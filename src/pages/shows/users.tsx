@@ -12,7 +12,7 @@ const ShowsPage = () => {
 			<Layout>
 				<main className="  justify-center">
 					<h1 className=" top-20 text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-						Popular shows!
+						User shows!
 					</h1>
 					<ShowsViewer userShows />
 				</main>

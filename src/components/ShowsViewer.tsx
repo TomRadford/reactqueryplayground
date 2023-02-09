@@ -5,6 +5,7 @@ import React, { forwardRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
 import { fetchPublicUserShows } from '../lib/services/userShows'
+import { ShowSchema } from '../../schema'
 
 const ShowSkeleton = forwardRef((_, ref: React.Ref<HTMLElement>) => {
 	return (
@@ -64,7 +65,7 @@ const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 					<>
 						<React.Fragment key={i}>
 							{group.items.map((show) => (
-								<Show show={show} key={show.tmdb_id} />
+								<Show show={show} key={show.tmdb_id} userShow={userShows} />
 							))}
 						</React.Fragment>
 					</>

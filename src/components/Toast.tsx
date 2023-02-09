@@ -9,23 +9,22 @@ const ToastMessage = ({
 	message: z.infer<typeof MessageSchema>
 }) => {
 	const removeLast = useToast((state) => state.removeLast)
-	const messages = useToast((state) => state.messages)
+
 	const displayTime = 2000
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			removeLast()
 		}, displayTime)
-		console.log(timeout)
 		return () => clearTimeout(timeout)
-	}, [messages])
+	})
 
-	// animate-[wiggle_1s_ease-in-out_linear]`
 	return (
 		<div
-			className={`flex h-24 w-72 animate-[animateIn_0.5s_ease-in-out]  items-center justify-center rounded-lg ${
-				message.type === 'error' ? `bg-red-700` : `bg-slate-800`
-			}`}
+			className={`flex h-24 w-72 items-center  justify-center rounded-lg py-5 px-7 text-center 
+      ${message.type === 'error' ? `bg-red-700` : `bg-slate-800`}
+			  animate-[toast_0.5s_ease-in-out_forwards] opacity-0
+      `}
 		>
 			<p className="text-white">{message.text}</p>
 		</div>

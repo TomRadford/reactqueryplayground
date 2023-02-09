@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			keyframes: {
-				animateIn: {
+				toast: {
 					'0%': { opacity: 0 },
 					'100%': { opacity: 1 },
 				},
