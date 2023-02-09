@@ -1,9 +1,11 @@
+import { nanoid } from 'nanoid'
 import Image from 'next/image'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { z } from 'zod'
 import type { TmdbShowSchema } from '../../schema'
 import type { ShowSchema } from '../../schema'
+import { useToast } from '../lib/store'
 
 const Show = ({
 	show,
@@ -11,9 +13,13 @@ const Show = ({
 	show: z.infer<typeof TmdbShowSchema> | z.infer<typeof ShowSchema>
 }) => {
 	const [showBg, setShowBg] = useState(false)
+	const addMessage = useToast((store) => store.addMessage)
 	return (
 		<article className="drop-shadow-ld bg-blur-lg relative mx-auto flex w-[300px] flex-col justify-center overflow-hidden rounded-xl bg-slate-300">
-			<button className="absolute right-1 top-1 z-10 hover:scale-110">
+			<button
+				onClick={() => addMessage({ type: 'info', text: nanoid() })}
+				className="absolute right-1 top-1 z-10 hover:scale-110 "
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

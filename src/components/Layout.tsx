@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
 import { useScrollPosition } from '../lib/hooks/scroll'
+import ToastContainer from './Toast'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	const scrollPosition = useScrollPosition()
 	return (
 		<div className=" flex h-screen w-screen flex-col pt-16">
+			<ToastContainer />
 			<nav
 				className={`fixed top-5 z-20 flex w-full items-center justify-center gap-4 transition-all duration-500 ${
 					scrollPosition > 15 ? 'bg-white opacity-70 ' : ''
