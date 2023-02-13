@@ -1,13 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { nanoid } from 'nanoid'
 import Image from 'next/image'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { z } from 'zod'
-import { date } from 'zod'
 import type { TmdbShowSchema } from '../../schema'
 import { ShowResultsPaginatedSchema } from '../../schema'
-import { ShowResultsSchema } from '../../schema'
 import { ShowSchema } from '../../schema'
 
 import {
@@ -51,19 +48,6 @@ const Show = ({
 				}
 			})
 		},
-		// onMutate: async (newShow) => {
-		// 	console.log(newShow)
-		// 	await queryClient.cancelQueries({ queryKey: ['userShows'] })
-
-		// 	const prevShows = ShowResultsPaginatedSchema.parse(
-		// 		queryClient.getQueryData(['userShows'])
-		// 	)
-
-		// 	return { prevShows }
-		// },
-		// onSettled: () => {
-		// 	void queryClient.invalidateQueries({ queryKey: ['userShows'] })
-		// },
 	})
 	const removeUserShowMutation = useMutation({
 		mutationFn: (userShow: z.infer<typeof ShowSchema>) => {

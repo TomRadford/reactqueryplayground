@@ -5,7 +5,6 @@ import React, { forwardRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
 import { fetchPublicUserShows } from '../lib/services/userShows'
-import { ShowSchema } from '../../schema'
 
 const ShowSkeleton = forwardRef((_, ref: React.Ref<HTMLElement>) => {
 	return (
@@ -20,13 +19,19 @@ const ShowSkeleton = forwardRef((_, ref: React.Ref<HTMLElement>) => {
 
 ShowSkeleton.displayName = 'ShowSkeleton'
 
-const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
+const ShowsViewer = ({
+	userShows,
+	searchTerm,
+}: {
+	userShows?: boolean
+	searchTerm?: string
+}) => {
 	const { inView, ref } = useInView()
 	const { data, fetchNextPage, isLoading } = useInfiniteQuery({
 		queryKey: [userShows ? 'userShows' : 'popularShows'],
 		queryFn: userShows ? fetchPublicUserShows : fetchPopularShows,
 		refetchOnMount: false,
-		getNextPageParam: (lastPage, pages) => lastPage.page + 1,
+		getNextPageParam: (lastPage) => lastPage.page + 1,
 	})
 
 	if (isLoading) {
@@ -62,13 +67,11 @@ const ShowsViewer = ({ userShows }: { userShows?: boolean }) => {
 		<div className="flex flex-col items-center">
 			<div className="mx-auto mt-10 grid max-w-[1450px] grid-cols-1 gap-3 md:mx-16 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
 				{data?.pages.map((group, i) => (
-					<>
-						<React.Fragment key={i}>
-							{group.items.map((show) => (
-								<Show show={show} key={show.tmdb_id} userShow={userShows} />
-							))}
-						</React.Fragment>
-					</>
+					<React.Fragment key={i}>
+						{group.items.map((show) => (
+							<Show show={show} key={show.tmdb_id} userShow={userShows} />
+						))}
+					</React.Fragment>
 				))}
 				{getLoader()}
 			</div>

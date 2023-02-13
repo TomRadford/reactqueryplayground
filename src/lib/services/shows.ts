@@ -48,3 +48,26 @@ export const fetchPopularShows = async ({
 
 	return ShowResultsSchema.parse(showResults)
 }
+
+// export const searchShows = async ({
+// 	pageParam = 1,
+// }): Promise<z.infer<typeof ShowResultsSchema>> => {
+// 	const { data }: { data: ApiResult } = await axios.get(
+// 		`/api/tv/popular/${pageParam}`
+// 	)
+// 	const items = z.array(TmdbShowSchema).parse(
+// 		data.results.map((show) => {
+// 			return {
+// 				...show,
+// 				tmdb_id: show.id ? String(show.id) : nanoid(),
+// 			}
+// 		})
+// 	)
+// 	const showResults: z.infer<typeof ShowResultsSchema> = {
+// 		page: data.page,
+// 		totalPages: data.total_pages,
+// 		items,
+// 	}
+
+// 	return ShowResultsSchema.parse(showResults)
+// }

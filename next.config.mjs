@@ -23,6 +23,10 @@ const config = {
 	async rewrites() {
 		return [
 			{
+				source: '/api/search/tv/:q/:page',
+				destination: `https://api.themoviedb.org/3/search/tv?page=:page&query=:q&api_key=${serverEnv.TMDB_KEY}`,
+			},
+			{
 				source: '/api/tv/popular/:page',
 				destination: `https://api.themoviedb.org/3/tv/popular?page=:page&api_key=${serverEnv.TMDB_KEY}`,
 			},
